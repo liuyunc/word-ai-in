@@ -16,8 +16,8 @@ const App: React.FC = () => {
 
   const openaiConfig: OpenAIConfig = {
     apiKey: "YOUR_API_KEY_HERE",
-    baseUrl: "https://api.openai.com",
-    model: "gpt-4.1-mini",
+    baseUrl: "http://10.20.40.101/v1",
+    model: "qwen3-30b-a3b-thinking-2507-fp8",
   };
 
   const handleGetParagraph = async () => {
