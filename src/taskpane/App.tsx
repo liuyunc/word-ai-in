@@ -16,6 +16,7 @@ const App: React.FC = () => {
 
   const openaiConfig: OpenAIConfig = {
     apiKey: "YOUR_API_KEY_HERE",
+    // 默认直接访问 GPUStack 模型 `http://10.20.40.101/v1`（HTTP 部署，无 HTTPS 证书）
     baseUrl: "http://10.20.40.101/v1",
     model: "qwen3-30b-a3b-thinking-2507-fp8",
   };

@@ -7,8 +7,8 @@ AIword 插件
 AI 审查助手是一款 Word 插件，用于在文档中快速对选中的段落进行错别字、标点和规范编号审查。按照以下步骤进行体验：
 
 1. **安装依赖**：在项目根目录执行 `npm install` 安装所需依赖。
-2. **填写模型配置**：打开 `src/taskpane/App.tsx`，将 `openaiConfig` 中的 `apiKey`、`baseUrl`、`model` 替换为可用的模型服务配置。
-3. **启动调试服务**：运行 `npm start`，默认会在 `https://localhost:3000` 启动 Webpack Dev Server。
+2. **填写模型配置**：打开 `src/taskpane/App.tsx`，将 `openaiConfig` 中的 `apiKey`、`model` 替换为可用的模型服务配置。`baseUrl` 默认指向 GPUStack 大模型主机 `http://10.20.40.101/v1`（HTTP 部署，无需 webhook 转发）。
+3. **启动调试服务**：运行 `npm start`，默认会在 `https://localhost:34567` 启动 Webpack Dev Server。
 4. **在 Word 中加载插件**：通过 Office 加载项侧载功能选择打包后的 manifest（`manifest.xml`），或在开发模式下侧载本地项目，具体方法可参考 Office 加载项官方文档。
 5. **获取段落文本**：在 Word 文档中将光标放在需要审查的段落上，点击任务窗格中的“获取当前段落”。
 6. **执行审查**：确认段落文本后点击“审查当前段落”，等待模型返回并展示结果。
@@ -24,5 +24,12 @@ AI 审查助手是一款 Word 插件，用于在文档中快速对选中的段�
 
 - **开发模式**：`npm start` 会启动热更新，便于调试界面与交互逻辑。
 - **生产打包**：使用 `npm run build` 生成生产包并结合 Office 加载项部署流程进行发布。
+
+## 部署建议
+
+- **模型服务**：客户端默认直接访问 GPUStack 大模型主机 `http://10.20.40.101/v1`，使用 HTTP 协议（内网无 HTTPS 证书）。
+- **清单域名**：生产或内网部署时，请将 `manifest.xml` 中的 `https://localhost:34567` 改为可被终端访问的内网域名（如 `http://10.20.41.24:34567`），避免客户端仍指向本地地址。内网未配置 HTTPS 证书，请使用 `http` 前缀与对应端口。
+- **API 配置**：如有统一的内网 Key，可在 `openaiConfig` 中直接写入；否则可在插件设置界面或编译时注入环境变量。
+- **全量集成方案**：若需进一步减少配置，也可在构建时将默认 Key 与模型名称固化到插件配置中，保证侧载即用。
 
 如需更详细的代码结构说明，请参考 `docs/wiki.md` 中的软件结构与函数说明。
