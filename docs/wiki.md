@@ -33,6 +33,7 @@
 - `callOpenAIForReview(paragraphText, config)`：
   - 构造面向铁路通信/工程规范审校的系统提示词，要求返回包含 `typos`、`punctuations`、`standards` 字段的 JSON。
   - 归一化 `baseUrl` 并定位 `/v1/chat/completions` 接口。
+  - 默认直接访问 GPUStack 大模型主机 `http://10.20.40.101/v1`（内网 HTTP 部署，无 HTTPS 证书）。
   - 以 `Bearer` 头携带 `apiKey` 发送请求，温度默认为 0.1。
   - 返回 `rawResponse` 字符串（模型输出的消息内容），由调用方负责解析。
 

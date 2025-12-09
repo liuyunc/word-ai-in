@@ -1,6 +1,7 @@
 export interface OpenAIConfig {
   apiKey: string;
-  baseUrl?: string; // 默认使用GPUSTUCK的 http://10.20.40.101/v1
+  // 默认指向 GPUStack 模型主机 http://10.20.40.101/v1（HTTP 部署，无 HTTPS 证书）
+  baseUrl?: string;
   model?: string; // 默认 使用qwen3-30b-a3b-thinking-2507-fp8
 }
 
